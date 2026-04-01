@@ -4,9 +4,13 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import type { QuestCategory } from '@/lib/types'
 
 const TABS: { value: QuestCategory; label: string }[] = [
-  { value: 'hr-beginner',    label: 'HR 초보자' },
-  { value: 'role-specific',  label: '직군별 전직' },
-  { value: 'daily-monthly',  label: '일일/월간' },
+  { value: 'hr-beginner',         label: 'HR 초보자' },
+  { value: 'role-specific',       label: '직군별 전직' },
+  { value: 'daily-monthly',       label: '일일/월간' },
+  { value: 'pre-boarding',        label: '입사 전 준비' },
+  { value: 'day-one',             label: '첫 출근' },
+  { value: 'mandatory-training',  label: '필수 교육' },
+  { value: 'company-culture',     label: '조직 이해' },
 ]
 
 interface CategoryTabsProps {

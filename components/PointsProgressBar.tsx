@@ -19,7 +19,7 @@ export default function PointsProgressBar({ currentPoints, currentStage }: Point
         </span>
         {nextStagePoints !== null ? (
           <span className="text-gray-400">
-            다음 단계까지 <span className="font-semibold text-gray-600">{nextStagePoints - currentPoints}P</span>
+            다음 단계까지 <span className="font-semibold text-gray-600">{Math.max(0, nextStagePoints - currentPoints)}P</span>
           </span>
         ) : (
           <span className="font-semibold text-green-600">최고 단계 달성! 🎉</span>

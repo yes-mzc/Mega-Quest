@@ -91,5 +91,167 @@ export const initialQuests: Quest[] = [
     rewardPoints: 3,
     status: 'available',
   },
+
+  // ── Stage 1: Pre-boarding (available) ── 합계 11P ──────────────────────────
+  {
+    id: 'pre-boarding-docs',
+    category: 'pre-boarding',
+    title: '입사 서류 제출',
+    description: '주민등록등본, 졸업증명서, 통장사본 등 필수 입사 서류를 HR 포탈에 제출하세요.',
+    rewardPoints: 3,
+    status: 'available',
+  },
+  {
+    id: 'pre-boarding-security-agreement',
+    category: 'pre-boarding',
+    title: '보안 서약서 작성',
+    description: '보안 서약서 및 개인정보 수집·이용 동의서를 작성하고 제출하세요.',
+    rewardPoints: 2,
+    status: 'available',
+  },
+  {
+    id: 'pre-boarding-account-setup',
+    category: 'pre-boarding',
+    title: '사내 계정 생성',
+    description: '업무용 이메일, 메신저, 사내 포탈 계정을 생성하고 초기 비밀번호를 변경하세요.',
+    rewardPoints: 3,
+    status: 'available',
+  },
+  {
+    id: 'pre-boarding-profile-photo',
+    category: 'pre-boarding',
+    title: '프로필 사진 등록',
+    description: '사내 시스템에 프로필 사진을 등록하세요.',
+    rewardPoints: 1,
+    status: 'available',
+  },
+  {
+    id: 'pre-boarding-self-intro',
+    category: 'pre-boarding',
+    title: '자기소개서 작성',
+    description: '사내 게시판에 게시될 자기소개를 작성하고 등록하세요.',
+    rewardPoints: 2,
+    status: 'available',
+  },
+
+  // ── Stage 2: Day 1 (locked) ── 합계 12P ────────────────────────────────────
+  {
+    id: 'day-one-id-card',
+    category: 'day-one',
+    title: '사원증 수령',
+    description: '총무팀에서 사원증 및 출입카드를 수령하고 등록하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
+  {
+    id: 'day-one-workstation',
+    category: 'day-one',
+    title: '장비 세팅',
+    description: '배정된 자리에서 노트북, 모니터 등 장비를 수령하고 초기 세팅을 완료하세요.',
+    rewardPoints: 3,
+    status: 'locked',
+  },
+  {
+    id: 'day-one-wifi-vpn',
+    category: 'day-one',
+    title: 'Wi-Fi / VPN 연결',
+    description: '사내 Wi-Fi에 접속하고 VPN을 설치하여 정상 연결을 확인하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
+  {
+    id: 'day-one-team-intro',
+    category: 'day-one',
+    title: '팀원 인사',
+    description: '소속 팀원 전원에게 인사하고 자기소개를 완료하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
+  {
+    id: 'day-one-office-tour',
+    category: 'day-one',
+    title: '사무실 투어',
+    description: '회의실, 휴게실, 식당, 비상구 위치를 파악하고 투어를 완료하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
+  {
+    id: 'day-one-buddy',
+    category: 'day-one',
+    title: '멘토/버디 확인',
+    description: '배정된 멘토 또는 버디를 확인하고 첫 미팅을 진행하세요.',
+    rewardPoints: 1,
+    status: 'locked',
+  },
+
+  // ── Stage 3: Mandatory Training (locked) ── 합계 14P ───────────────────────
+  {
+    id: 'training-security',
+    category: 'mandatory-training',
+    title: '정보보안 교육',
+    description: '정보보안 온라인 교육을 이수하고 수료증을 제출하세요.',
+    rewardPoints: 3,
+    status: 'locked',
+  },
+  {
+    id: 'training-sexual-harassment',
+    category: 'mandatory-training',
+    title: '성희롱 예방 교육',
+    description: '성희롱 예방 교육을 이수하고 수료증을 제출하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
+  {
+    id: 'training-workplace-bullying',
+    category: 'mandatory-training',
+    title: '직장 내 괴롭힘 예방 교육',
+    description: '직장 내 괴롭힘 예방 교육을 이수하고 수료증을 제출하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
+  {
+    id: 'training-safety-health',
+    category: 'mandatory-training',
+    title: '안전보건 교육',
+    description: '산업안전보건 교육을 이수하고 수료증을 제출하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
+  {
+    id: 'training-privacy',
+    category: 'mandatory-training',
+    title: '개인정보 보호 교육',
+    description: '개인정보 보호 온라인 교육을 이수하고 수료증을 제출하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
+  {
+    id: 'training-systems',
+    category: 'mandatory-training',
+    title: '사내 시스템 교육',
+    description: '그룹웨어, 근태관리, 경비처리 시스템 사용법 교육을 이수하세요.',
+    rewardPoints: 3,
+    status: 'locked',
+  },
+
+  // ── Stage 4: Know Your Company (locked) ── 합계 5P (추가 예정) ─────────────
+  {
+    id: 'culture-vision-quiz',
+    category: 'company-culture',
+    title: '회사 비전/미션 퀴즈',
+    description: '회사 비전, 미션, 핵심 가치를 학습하고 퀴즈를 완료하세요.',
+    rewardPoints: 3,
+    status: 'locked',
+  },
+  {
+    id: 'culture-org-chart',
+    category: 'company-culture',
+    title: '조직도 파악',
+    description: '사내 포탈에서 전체 조직도를 확인하고 주요 부서 역할을 파악하세요.',
+    rewardPoints: 2,
+    status: 'locked',
+  },
 ]
-// available 퀘스트 총합: 9+8+13 = 30P → 전체 퀘스트 잠금 해제 ✓
+// 기존 available 합계: 30P
+// Stage1 pre-boarding available: 11P
+// Stage2 day-one locked: 12P | Stage3 mandatory-training locked: 14P | Stage4 company-culture locked: 5P

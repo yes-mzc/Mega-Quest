@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useGameStore } from '@/store/gameStore'
 import QRScannerUI from '@/components/QRScannerUI'
@@ -26,6 +26,15 @@ export default function QuestDetailPage({ params }: { params: { id: string } }) 
   const [showModal, setShowModal] = useState(false)
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const scanTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // 언마운트 시 모든 타이머 정리
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+      if (scanTimerRef.current) clearTimeout(scanTimerRef.current)
+    }
+  }, [])
 
   // 퀘스트 없음
   if (!quest) {
@@ -33,6 +42,25 @@ export default function QuestDetailPage({ params }: { params: { id: string } }) 
       <div className="flex flex-col items-center justify-center gap-4 pt-20 px-4 text-center">
         <p className="text-gray-500">퀘스트를 찾을 수 없습니다.</p>
         <button onClick={() => router.push('/quests')} className="text-blue-600 font-semibold">
+          퀘스트 목록으로
+        </button>
+      </div>
+    )
+  }
+
+  // 잠긴 퀘스트
+  if (quest.status === 'locked') {
+    return (
+      <div className="flex flex-col items-center justify-center gap-6 pt-20 px-6 text-center">
+        <span className="text-6xl">🔒</span>
+        <div>
+          <h2 className="text-xl font-bold text-gray-800">아직 잠긴 퀘스트예요</h2>
+          <p className="mt-1 text-sm text-gray-400">{quest.title}</p>
+        </div>
+        <button
+          onClick={() => router.push('/quests')}
+          className="w-full max-w-xs rounded-xl bg-gray-200 py-3 font-bold text-gray-600"
+        >
           퀘스트 목록으로
         </button>
       </div>
@@ -62,7 +90,7 @@ export default function QuestDetailPage({ params }: { params: { id: string } }) 
   const handleScan = () => {
     if (isScanning) return
     setIsScanning(true)
-    setTimeout(() => {
+    scanTimerRef.current = setTimeout(() => {
       completeQuest(quest.id)
       setIsScanning(false)
       setShowModal(true)

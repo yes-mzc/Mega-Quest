@@ -1,5 +1,12 @@
 export type QuestStatus = 'locked' | 'available' | 'completed'
-export type QuestCategory = 'hr-beginner' | 'role-specific' | 'daily-monthly'
+export type QuestCategory =
+  | 'hr-beginner'
+  | 'role-specific'
+  | 'daily-monthly'
+  | 'pre-boarding'
+  | 'day-one'
+  | 'mandatory-training'
+  | 'company-culture'
 
 export interface User {
   id: string

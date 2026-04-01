@@ -21,14 +21,15 @@
 ## 3. 기술 스택 및 요구사항
 
 ### 프론트엔드 (Mobile Web)
-- **Framework:** React.js 또는 Next.js (반응형 디자인 필수)
+- **Framework:** Next.js 14 (App Router, `'use client'` 컴포넌트에서만 Zustand 사용)
 - **Styling:** Tailwind CSS (모바일 최적화 UI)
-- **State Management:** React Context 또는 Zustand (포인트 및 퀘스트 상태 관리)
+- **State Management:** Zustand 5 + persist middleware (포인트 및 퀘스트 상태 관리)
 
 ### 백엔드 및 데이터 (MVP용 Mock Data)
-- **User 모델:** { id, name, type, points, pet_stage, title }
-- **Quest 모델:** { id, category, title, reward_points, status: 'locked' | 'available' | 'completed' }
-- **AI 연동 (선택):** Gemini API를 활용한 슬랙 기반 Q&A 인터페이스 모사.
+- **User 모델:** `{ id, name, type, points, petStage: 1|2|3, title }`
+- **Quest 모델:** `{ id, category: QuestCategory, title, description, rewardPoints, status: 'locked' | 'available' | 'completed' }`
+- **QuestCategory:** `'hr-beginner' | 'role-specific' | 'daily-monthly' | 'pre-boarding' | 'day-one' | 'mandatory-training' | 'company-culture'`
+- **총 퀘스트:** 31개 (기존 9개 + 신규 22개)
 
 ---
 
@@ -40,8 +41,8 @@
 - **퀵 버튼:** '오늘의 일일 퀘스트' 바로가기.
 
 ### [컴포넌트 2] 퀘스트 로드맵 (Quest List)
-- **카테고리 탭:** [HR-초보자], [직군별-전직], [일일/월간].
-- **리스트 아이템:** 퀘스트 제목, 보상 포인트, 상태 아이콘(완료/미완료).
+- **카테고리 탭:** [HR-초보자], [직군별-전직], [일일/월간], [입사 전 준비], [첫 출근], [필수 교육], [조직 이해] — 총 7개 탭
+- **리스트 아이템:** 퀘스트 제목, 보상 포인트, 상태 아이콘(완료/미완료/잠금)
 
 ### [컴포넌트 3] 미션 수행 시뮬레이터 (QR)
 - **QR 스캔 화면:** 카메라 뷰를 흉내 낸 UI와 '스캔하기' 버튼.
@@ -53,6 +54,10 @@
 - **초보자 퀘스트:** 인사제도 확인, 오피스 투어, 프로필 설정.
 - **전직(직군) 퀘스트:** 슬랙/지라 권한 신청, MSP 기초 교육, CTU 소개.
 - **일일 퀘스트:** 메일 확인, 전자결재 확인, 회의실 매너 준수.
+- **입사 전 준비 (Pre-boarding):** 입사 서류 제출, 보안 서약서 작성, 사내 계정 생성, 프로필 사진 등록, 자기소개서 작성.
+- **첫 출근 (Day 1):** 사원증 수령, 장비 세팅, Wi-Fi/VPN 연결, 팀원 인사, 사무실 투어, 멘토/버디 확인.
+- **필수 교육 (Mandatory Training):** 정보보안, 성희롱 예방, 직장 내 괴롭힘 예방, 안전보건, 개인정보 보호, 사내 시스템 교육.
+- **조직 이해 (Company Culture):** 회사 비전/미션 퀴즈, 조직도 파악. (추가 예정)
 - **보상 체계:** 현금성 재화가 아닌 '포인트' 적립. 주기적 초기화 및 기간 한정 '명예 칭호' 부여.
 
 ---

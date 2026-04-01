@@ -8,9 +8,8 @@
 
 ## 2. Epic
 
-- **Parent Epic PRD:** [Mega-Quest MVP Epic](../epic.md)
-- **Implementation Plan:** [Full MVP Implementation Plan](../full-mvp/implementation-plan.md)
-- **Related Features:** [온보딩 플로우 PRD](../onboarding-flow/prd.md), [로그인 플로우 PRD](../login-flow/prd.md)
+- **Parent Epic PRD:** [Mega-Quest MVP Epic](../epic.md)- **Implementation Plan:** [Full MVP Implementation Plan](../../plan/implementation-plan.md)
+- **Related Features:** [온보딩 플로우 PRD](onboarding-flow.md), [로그인 플로우 PRD](login-flow.md)
 
 ---
 
@@ -72,6 +71,7 @@
 **공통:**
 - 완료 모달에서 "확인" 클릭 시 홈(`/`)으로 이동.
 - 이미 `completed` 상태인 퀘스트 접근 시 완료 안내 화면 + 홈 버튼 표시.
+- `locked` 상태인 퀘스트 URL 직접 접근 시 잠금 안내 화면(🔒) + 퀘스트 목록 버튼 표시.
 - 헤더: QR 퀘스트는 `bg-black` 배경, 일반 퀘스트는 `bg-white border-b` 배경.
 
 ### Non-Functional Requirements
