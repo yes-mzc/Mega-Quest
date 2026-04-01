@@ -1,3 +1,5 @@
+'use client'
+
 import Modal from '@/components/ui/Modal'
 import { useRouter } from 'next/navigation'
 import type { Quest } from '@/lib/types'
