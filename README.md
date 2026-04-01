@@ -61,7 +61,7 @@ npx tsc --noEmit
 | 1 | `/onboarding` | 앱 소개 인트로 화면 |
 | 2 | `/login` | Google 로그인 UI (Mock, 실제 인증 없음) |
 | 3 | `/` | 홈 대시보드 — 트리니티 펫, 포인트 현황, 오늘의 퀘스트 |
-| 4 | `/quests` | 퀘스트 로드맵 — 7개 카테고리 탭, 28개 미션 목록 |
+| 4 | `/quests` | 퀘스트 로드맵 — 7개 카테고리 탭, 28개 미션 |
 | 5 | `/quests/[id]` | 미션 수행 — QR 스캔 또는 달성 확인 플로우 |
 
 ---
@@ -94,22 +94,22 @@ Mega-Quest/
 ├── components/
 │   ├── ui/                  # Badge, Modal, ProgressBar, BottomNav, NavWrapper
 │   ├── icons/               # GoogleIcon 등 SVG
-│   ├── PetAvatar.tsx        # 펫 이미지 — 없으면 이모지 자동 폴백
-│   ├── CategoryTabs.tsx     # 7개 카테고리 탭
+│   ├── PetAvatar.tsx        # 이모지 기반 펫 표시 (🥚🐣✨)
+│   ├── CategoryTabs.tsx     # 7개 카테고리 탭 (우측 fade gradient)
 │   ├── QuestCard.tsx        # 퀘스트 리스트 아이템
 │   ├── QRScannerUI.tsx      # QR 스캔 시뮬레이터
-│   ├── MissionConfirmUI.tsx # 달성 확인 플로우 (로딩 → 확인 → 모달)
-│   ├── CompletionModal.tsx  # 완료 보상 모달
-│   ├── DailyQuestShortcut.tsx
+│   ├── MissionConfirmUI.tsx # 달성 확인 플로우 (로딩 1s → 확인 1s → 모달)
+│   ├── CompletionModal.tsx  # 완료 보상 모달 (다음 퀘스트 / 홈으로)
+│   ├── DailyQuestShortcut.tsx  # 일일 퀘스트 바로가기 (완료 시 상태 변경)
 │   └── PointsProgressBar.tsx
 ├── store/
-│   └── gameStore.ts         # Zustand store (user, quests, completeQuest, resetGame)
+│   └── gameStore.ts         # Zustand store — version: 4
 ├── lib/
-│   ├── types.ts             # User, Quest, PetStageConfig, QuestCategory
-│   ├── mockData.ts          # Mock 데이터 (퀘스트 28개, petStageConfig)
+│   ├── types.ts             # User, Quest, PetStageConfig, QuestCategory (7개)
+│   ├── mockData.ts          # Mock 데이터 — 퀘스트 28개, 전체 available
 │   └── utils.ts             # getPetStage, getProgressPercent, getNextStagePoints
 ├── docs/                    # 기획 문서 (epic, requirements, prd/)
-└── plan/                    # 구현 계획 (implementation-plan, feature-quest-missions-1)
+└── plan/                    # 구현 계획
 ```
 
 ---
@@ -126,86 +126,109 @@ Mega-Quest/
 
 ---
 
-## 퀘스트 목록 (총 28개)
+## 퀘스트 목록 (총 28개, 전체 available)
 
-### HR 초보자 `hr-beginner` — 3개 (8P)
+탭 순서는 실제 온보딩 여정 순서를 따릅니다.
 
-| 퀘스트 | 포인트 | 상태 |
-|---|---|---|
-| 인사제도 확인 | 3P | available |
-| 오피스 투어 | 3P | available |
-| 프로필 설정 | 2P | available |
+### 1. 입사 전 준비 `pre-boarding` — 5개 (11P)
 
-### 직군별 전직 `role-specific` — 3개 (13P)
+| 퀘스트 | 포인트 |
+|---|---|
+| 입사 서류 제출 | 3P |
+| 보안 서약서 작성 | 2P |
+| 사내 계정 생성 | 3P |
+| 프로필 사진 등록 | 1P |
+| 자기소개서 작성 | 2P |
 
-| 퀘스트 | 포인트 | 상태 |
-|---|---|---|
-| 슬랙/지라 권한 신청 | 5P | available |
-| MSP 기초 교육 | 5P | available |
-| CTU 소개 | 3P | available |
+### 2. 첫 출근 `day-one` — 6개 (12P)
 
-### 일일/월간 `daily-monthly` — 3개 (9P)
+| 퀘스트 | 포인트 |
+|---|---|
+| 사원증 수령 | 2P |
+| 장비 세팅 | 3P |
+| Wi-Fi / VPN 연결 | 2P |
+| 팀원 인사 | 2P |
+| 사무실 투어 | 2P |
+| 멘토/버디 확인 | 1P |
 
-| 퀘스트 | 포인트 | 상태 |
-|---|---|---|
-| 회의실 QR 체크인 🎯 | 5P | available |
-| 업무 메일 확인 | 2P | available |
-| 전자결재 확인 | 2P | available |
+### 3. 필수 교육 `mandatory-training` — 6개 (14P)
 
-### 입사 전 준비 `pre-boarding` — 5개 (11P)
+| 퀘스트 | 포인트 |
+|---|---|
+| 정보보안 교육 | 3P |
+| 성희롱 예방 교육 | 2P |
+| 직장 내 괴롭힘 예방 교육 | 2P |
+| 안전보건 교육 | 2P |
+| 개인정보 보호 교육 | 2P |
+| 사내 시스템 교육 | 3P |
 
-| 퀘스트 | 포인트 | 상태 |
-|---|---|---|
-| 입사 서류 제출 | 3P | available |
-| 보안 서약서 작성 | 2P | available |
-| 사내 계정 생성 | 3P | available |
-| 프로필 사진 등록 | 1P | available |
-| 자기소개서 작성 | 2P | available |
+### 4. 조직 이해 `company-culture` — 2개 (5P)
 
-### 첫 출근 `day-one` — 6개 (12P)
+| 퀘스트 | 포인트 |
+|---|---|
+| 회사 비전/미션 퀴즈 | 3P |
+| 조직도 파악 | 2P |
 
-| 퀘스트 | 포인트 | 상태 |
-|---|---|---|
-| 사원증 수령 | 2P | locked |
-| 장비 세팅 | 3P | locked |
-| Wi-Fi / VPN 연결 | 2P | locked |
-| 팀원 인사 | 2P | locked |
-| 사무실 투어 | 2P | locked |
-| 멘토/버디 확인 | 1P | locked |
+### 5. HR 초보자 `hr-beginner` — 3개 (8P)
 
-### 필수 교육 `mandatory-training` — 6개 (14P)
+| 퀘스트 | 포인트 |
+|---|---|
+| 인사제도 확인 | 3P |
+| 오피스 투어 | 3P |
+| 프로필 설정 | 2P |
 
-| 퀘스트 | 포인트 | 상태 |
-|---|---|---|
-| 정보보안 교육 | 3P | locked |
-| 성희롱 예방 교육 | 2P | locked |
-| 직장 내 괴롭힘 예방 교육 | 2P | locked |
-| 안전보건 교육 | 2P | locked |
-| 개인정보 보호 교육 | 2P | locked |
-| 사내 시스템 교육 | 3P | locked |
+### 6. 직군별 전직 `role-specific` — 3개 (13P)
 
-### 조직 이해 `company-culture` — 2개 (5P)
+| 퀘스트 | 포인트 |
+|---|---|
+| 슬랙/지라 권한 신청 | 5P |
+| MSP 기초 교육 | 5P |
+| CTU 소개 | 3P |
 
-| 퀘스트 | 포인트 | 상태 |
-|---|---|---|
-| 회사 비전/미션 퀴즈 | 3P | locked |
-| 조직도 파악 | 2P | locked |
+### 7. 일일/월간 `daily-monthly` — 3개 (9P)
+
+| 퀘스트 | 포인트 |
+|---|---|
+| 회의실 QR 체크인 🎯 | 5P |
+| 업무 메일 확인 | 2P |
+| 전자결재 확인 | 2P |
+
+> 전체 완료 시 최대 **72P** 획득 → Stage 3 달성 가능
+
+---
+
+## UX 개선 이력
+
+| 항목 | 내용 |
+|---|---|
+| 탭 순서 | 온보딩 여정 순서로 재정렬 (입사 전 준비 → 첫 출근 → ...) |
+| 기본 탭 | 미완료 퀘스트 있는 첫 카테고리로 자동 포커스 |
+| 전체 진행률 | 퀘스트 목록 상단에 `N/28 완료` 배너 표시 |
+| 완료 모달 | "다음 퀘스트 하기" + "홈으로" 2버튼 제공 |
+| 일일 퀘스트 홈 버튼 | 전체 완료 시 "오늘의 미션 완료! 🎉" 상태로 변경 |
+| locked 카드 | opacity-50 + 클릭 비활성화 |
+| unlock 힌트 | 잠긴 퀘스트에 해제 조건 텍스트 표시 |
+| 완료 퀘스트 상세 | 획득 포인트 요약 표시 |
+| 탭 스크롤 인디케이터 | 우측 fade gradient로 스크롤 가능 암시 |
+| 미션 로딩 시간 | 2초 → 1초로 단축 |
+| 헤더 통일 | QR/일반 미션 모두 흰색 헤더 |
+| 펫 이미지 | 404 제거 — 이모지(🥚🐣✨)만 사용 |
 
 ---
 
 ## 주요 개발 메모
 
-**Zustand persist `version: 2`**  
-`mockData.ts`를 변경할 경우 버전을 올리면 사용자 localStorage가 자동 초기화됩니다.
+**Zustand persist `version: 4`**  
+`mockData.ts`를 변경할 때마다 버전을 +1 올리면 사용자 localStorage가 자동 초기화됩니다.
 
 **`useSearchParams` Suspense 필수**  
-Next.js 14 App Router에서 `useSearchParams`는 반드시 `<Suspense>` 내부에서 사용해야 합니다. `app/quests/page.tsx`의 `CategoryTabs` 컴포넌트를 참고하세요.
+Next.js 14 App Router에서 `useSearchParams`는 반드시 `<Suspense>` 내부에서 사용해야 합니다. (`app/quests/page.tsx` 참고)
 
 **QR / 달성확인 분기**  
-`id === 'meeting-room-qr'`인 퀘스트만 `QRScannerUI`를 렌더링하고, 나머지는 `MissionConfirmUI`(로딩 2초 → 확인 1초 → 완료 모달)를 사용합니다.
+`id === 'meeting-room-qr'`인 퀘스트만 `QRScannerUI`(스캔 2초), 나머지는 `MissionConfirmUI`(로딩 1초 → 확인 1초)를 사용합니다.
 
-**펫 이미지 폴백**  
-`public/pets/stage-1.png`, `stage-2.png`, `stage-3.png`가 없으면 🥚🐣✨ 이모지로 자동 전환됩니다.
+**`'use client'` 필수 컴포넌트**  
+`useRouter`, `useGameStore`, `useState` 등 클라이언트 훅을 사용하는 모든 컴포넌트에 반드시 선언해야 합니다.
 
 ---
 
