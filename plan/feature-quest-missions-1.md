@@ -25,7 +25,7 @@ tags: [feature, quest, onboarding, data]
 - **REQ-003**: 기존 카테고리(`hr-beginner`, `role-specific`, `daily-monthly`) 및 기존 9개 퀘스트는 수정·삭제하지 않는다.
 - **REQ-004**: `CategoryTabs` 컴포넌트의 TABS 배열에 새 카테고리 4개를 추가하여 탭 UI에 노출해야 한다.
 - **REQ-005**: 각 미션은 고유 `id`(kebab-case), `title`, `description`, `rewardPoints`, `status`, `category`를 가져야 한다.
-- **REQ-006**: 스테이지 흐름(1→2→3→4)을 반영하여 Stage 1은 `available`, Stage 2~4는 초기 `locked` 상태로 설정한다.
+- **REQ-006**: 데모 모드 — 전체 28개 퀘스트를 `available` 상태로 설정해 모든 미션 체험 가능하게 한다.
 - **REQ-007**: Stage 1 완료 포인트(11P)는 기존 daily-monthly 퀘스트(9P)와 합산 시 petStage 3(15P+) 진입이 가능해야 한다.
 - **CON-001**: 백엔드 없음 — 모든 데이터는 `lib/mockData.ts` mock 데이터로만 관리한다.
 - **CON-002**: TypeScript strict 모드 준수 — `QuestCategory` 타입 변경 시 모든 사용처에서 컴파일 오류 없어야 한다.
@@ -62,7 +62,7 @@ tags: [feature, quest, onboarding, data]
 | `pre-boarding-profile-photo` | 프로필 사진 등록 | 사내 시스템에 프로필 사진을 등록하세요. | 1 |
 | `pre-boarding-self-intro` | 자기소개서 작성 | 사내 게시판에 게시될 자기소개를 작성하고 등록하세요. | 2 |
 
-**Stage 2: Day 1** — `category: 'day-one'`, `status: 'locked'`, 합계 12P
+**Stage 2: Day 1** — `category: 'day-one'`, `status: 'available'`, 합계 12P
 
 | id | title | description | rewardPoints |
 |----|-------|-------------|--------------|
@@ -73,7 +73,7 @@ tags: [feature, quest, onboarding, data]
 | `day-one-office-tour` | 사무실 투어 | 회의실, 휴게실, 식당, 비상구 위치를 파악하고 투어를 완료하세요. | 2 |
 | `day-one-buddy` | 멘토/버디 확인 | 배정된 멘토 또는 버디를 확인하고 첫 미팅을 진행하세요. | 1 |
 
-**Stage 3: Mandatory Training** — `category: 'mandatory-training'`, `status: 'locked'`, 합계 14P
+**Stage 3: Mandatory Training** — `category: 'mandatory-training'`, `status: 'available'`, 합계 14P
 
 | id | title | description | rewardPoints |
 |----|-------|-------------|--------------|
@@ -84,7 +84,7 @@ tags: [feature, quest, onboarding, data]
 | `training-privacy` | 개인정보 보호 교육 | 개인정보 보호 온라인 교육을 이수하고 수료증을 제출하세요. | 2 |
 | `training-systems` | 사내 시스템 교육 | 그룹웨어, 근태관리, 경비처리 시스템 사용법 교육을 이수하세요. | 3 |
 
-**Stage 4: Know Your Company** — `category: 'company-culture'`, `status: 'locked'`, 합계 5P (⚠️ 미완성)
+**Stage 4: Know Your Company** — `category: 'company-culture'`, `status: 'available'`, 합계 5P
 
 | id | title | description | rewardPoints |
 |----|-------|-------------|--------------|
@@ -117,7 +117,7 @@ tags: [feature, quest, onboarding, data]
 | TASK-041 | `npm run build` — 빌드 성공 | ✅ | 2026-04-01 |
 | TASK-042 | `/quests` 접속 후 7개 탭 모두 노출 확인 | | |
 | TASK-043 | `?category=pre-boarding` → Stage 1 퀘스트 5개 표시 확인 | | |
-| TASK-044 | `?category=day-one` → locked 상태 퀘스트 6개 표시 확인 | | |
+| TASK-044 | `?category=day-one` → available 상태 퀘스트 6개 표시 확인 | ✅ | 2026-04-01 |
 
 ---
 
@@ -150,8 +150,8 @@ tags: [feature, quest, onboarding, data]
 - **TEST-001**: `getPetStage(11)` → `2` 반환 확인 (Stage 1 완료 시 petStage 2 진입)
 - **TEST-002**: `getProgressPercent(11, 2)` → `10` 반환 확인 (10P/10P 범위)
 - **TEST-003**: `/quests?category=pre-boarding` → 퀘스트 5개 렌더링 확인
-- **TEST-004**: `/quests?category=day-one` → locked 배지 포함 퀘스트 6개 렌더링 확인
-- **TEST-005**: `/quests/day-one-id-card` 직접 접근 → 🔒 잠금 안내 화면 표시 확인
+- **TEST-004**: `/quests?category=day-one` → available 배지 포함 퀘스트 6개 렌더링 확인 ✅
+- **TEST-005**: `/quests/day-one-id-card` 직접 접근 → 미션 확인 화면 정상 표시 확인 ✅
 - **TEST-006**: `completeQuest('pre-boarding-docs')` 호출 후 `user.points === 3`, 해당 퀘스트 `status === 'completed'` 확인
 - **TEST-007**: `tsc --noEmit` 오류 0개 확인
 - **TEST-008**: `npm run build` 성공 확인

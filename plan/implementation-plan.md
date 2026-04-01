@@ -20,11 +20,11 @@ Mega-Quest MVP는 신입사원이 모바일 웹앱을 통해 온보딩 퀘스트
 
 - **REQ-001**: 앱 진입점은 `/onboarding` → `/login` → `/` 순서로 구성한다.
 - **REQ-002**: 메인 대시보드(`/`)는 트리니티 펫(3단계), 포인트 프로그레스 바, 미완료 일일 퀘스트 목록, 일일 퀘스트 바로가기를 표시한다.
-- **REQ-003**: 퀘스트 로드맵(`/quests`)은 3개 카테고리 탭(HR초보자/직군별전직/일일월간)으로 필터링되며, URL 쿼리 파라미터(`?category=`)로 탭 상태를 제어한다.
-- **REQ-004**: `meeting-room-qr` 퀘스트만 QR 스캔 UI를 사용하고, 나머지 퀘스트는 미션 확인 플로우(달성하셨나요? → 로딩 2초 → 확인 1초 → 완료 모달)를 사용한다.
-- **REQ-005**: 모든 퀘스트(9개)는 `available` 상태이며 잠금 없이 도전 가능하다.
+- **REQ-003**: 퀘스트 로드맵(`/quests`)은 7개 카테고리 탭(입사전준비/첫출근/필수교육/조직이해/HR초보자/직군별전직/일일월간)으로 필터링되며, URL 쿼리 파라미터(`?category=`)로 탭 상태를 제어한다.
+- **REQ-004**: `meeting-room-qr` 퀘스트만 QR 스캔 UI를 사용하고(2초), 나머지 퀘스트는 미션 확인 플로우(달성하셨나요? → 로딩 1초 → 확인됨 1초 → 완료 모달)를 사용한다.
+- **REQ-005**: 모든 퀘스트(28개)는 `available` 상태이며 잠금 없이 도전 가능하다.
 - **REQ-006**: `petStage`는 포인트 기준 자동 계산: 0–9P = 1, 10–14P = 2, 15P+ = 3.
-- **REQ-007**: 전역 상태는 Zustand persist(`localStorage`, `version: 2`)로 새로고침 후에도 유지된다.
+- **REQ-007**: 전역 상태는 Zustand persist(`localStorage`, `version: 4`)로 새로고침 후에도 유지된다.
 - **REQ-008**: `/onboarding`, `/login` 경로에서 BottomNav를 숨긴다.
 - **CON-001**: 실제 Google OAuth, 세션, 토큰 구현 없음 — 버튼 클릭 시 즉시 `/` 이동.
 - **CON-002**: 실제 백엔드/DB 없음 — 모든 데이터는 `lib/mockData.ts` mock 데이터.
@@ -179,7 +179,7 @@ Mega-Quest MVP는 신입사원이 모바일 웹앱을 통해 온보딩 퀘스트
 **State & Data:**
 - **FILE-022**: `store/gameStore.ts` — Zustand store + persist. `user`, `quests`, `completeQuest`, `resetGame`.
 - **FILE-023**: `lib/types.ts` — 공통 TypeScript 인터페이스.
-- **FILE-024**: `lib/mockData.ts` — 초기 데이터 (user, quests 9개 all available, petStageConfig).
+- **FILE-024**: `lib/mockData.ts` — 초기 데이터 (user, quests 28개 all available, petStageConfig).
 - **FILE-025**: `lib/utils.ts` — `getPetStage`, `getProgressPercent`, `getNextStagePoints`.
 
 **Config:**
@@ -196,12 +196,12 @@ Mega-Quest MVP는 신입사원이 모바일 웹앱을 통해 온보딩 퀘스트
 - **TEST-002**: 온보딩 플로우 — `/onboarding` → "시작하기" → `/login` → Google 버튼 → `/` 이동 ✅
 - **TEST-003**: BottomNav 조건 — `/onboarding`, `/login`에서 미표시, 나머지에서 표시 ✅
 - **TEST-004**: QR 미션 플로우 — `/quests/meeting-room-qr` → QR UI → 스캔 2초 → 완료 모달 → 홈 + 포인트 +5 ✅
-- **TEST-005**: 일반 미션 플로우 — `/quests/hr-policy` → 달성하셨나요? → 확인 → 로딩 2초 → 확인됨 1초 → 완료 모달 → 홈 + 포인트 +3 ✅
+- **TEST-005**: 일반 미션 플로우 — `/quests/hr-policy` → 달성하셨나요? → 확인 → 로딩 1초 → 확인됨 1초 → 완료 모달 → 홈 + 포인트 +3 ✅
 - **TEST-006**: petStage 진화 — 0→9P: Stage 1, 10P: Stage 2, 15P: Stage 3 ✅
-- **TEST-007**: 퀘스트 카테고리 탭 — 3개 탭 전환 시 목록 필터링 정상 동작 ✅
-- **TEST-008**: URL 쿼리 연동 — `/quests?category=daily-monthly` 접근 시 해당 탭 자동 선택 ✅
+- **TEST-007**: 퀘스트 카테고리 탭 — 7개 탭 전환 시 목록 필터링 정상 동작 ✅
+- **TEST-008**: URL 쿼리 연동 — `/quests?category=pre-boarding` 접근 시 해당 탭 자동 선택 ✅
 - **TEST-009**: Zustand persist — 새로고침 후 포인트 + 퀘스트 상태 유지 ✅
-- **TEST-010**: localStorage 자동 초기화 — `version: 2`로 이전 locked 상태 리셋 ✅
+- **TEST-010**: localStorage 자동 초기화 — `version: 4`로 이전 데이터 리셋 ✅
 - **TEST-011**: 전 라우트 200 응답 — `/`, `/quests`, `/quests/[id]`, `/onboarding`, `/login` ✅
 
 ---
