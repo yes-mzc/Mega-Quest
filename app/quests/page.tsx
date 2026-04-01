@@ -16,7 +16,15 @@ function QuestListContent() {
   const quests = useGameStore((s) => s.quests)
 
   const rawCategory = searchParams.get('category')
-  const validCategories: QuestCategory[] = ['hr-beginner', 'role-specific', 'daily-monthly']
+  const validCategories: QuestCategory[] = [
+    'hr-beginner',
+    'role-specific',
+    'daily-monthly',
+    'pre-boarding',
+    'day-one',
+    'mandatory-training',
+    'company-culture',
+  ]
   const activeCategory: QuestCategory = validCategories.includes(rawCategory as QuestCategory)
     ? (rawCategory as QuestCategory)
     : DEFAULT_CATEGORY
