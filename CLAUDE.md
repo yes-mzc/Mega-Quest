@@ -26,6 +26,8 @@ Single global store (`useGameStore`) with two fields:
 - `user: User` — holds `points` and `petStage`
 - `quests: Quest[]` — each quest has `status: 'locked' | 'available' | 'completed'`
 
+Actions: `completeQuest(questId)` and `resetGame()` (wipes state back to `initialUser`/`initialQuests`).
+
 `petStage` is **derived**, not stored independently. `completeQuest(questId)` recalculates it via `getPetStage(newPoints)` from `lib/utils.ts` every time a quest is completed.
 
 **Zustand store version:** currently `5` in `gameStore.ts`. Bump this whenever `mockData.ts` changes to wipe user `localStorage` automatically.
@@ -43,6 +45,10 @@ Single global store (`useGameStore`) with two fields:
 | `/` | `app/page.tsx` | Home dashboard — PetAvatar, points, daily quest shortcut |
 | `/quests` | `app/quests/page.tsx` | Quest roadmap with 7 category tabs |
 | `/quests/[id]` | `app/quests/[id]/page.tsx` | Mission detail — QR or confirm flow |
+
+### Quest Data Shape
+
+`Quest` has an optional `helpUrl?: string` field — a link to the Megaone help center article for that quest. When present, shown as a reference link in the mission detail UI.
 
 ### Quest Detail Branching (`/quests/[id]`)
 

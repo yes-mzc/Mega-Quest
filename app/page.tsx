@@ -5,6 +5,7 @@ import { useGameStore } from '@/store/gameStore'
 import PetAvatar from '@/components/PetAvatar'
 import PointsProgressBar from '@/components/PointsProgressBar'
 import DailyQuestShortcut from '@/components/DailyQuestShortcut'
+import QuickLinks from '@/components/QuickLinks'
 import { ChevronRight } from 'lucide-react'
 
 export default function HomePage() {
@@ -39,6 +40,9 @@ export default function HomePage() {
         <h2 className="mb-3 text-sm font-semibold text-gray-500">성장 현황</h2>
         <PointsProgressBar currentPoints={user.points} currentStage={user.petStage} />
       </div>
+
+      {/* 바로가기 링크 */}
+      <QuickLinks />
 
       {/* 일일 퀘스트 바로가기 */}
       <DailyQuestShortcut />

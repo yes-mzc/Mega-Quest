@@ -27,6 +27,13 @@ export interface Quest {
   helpUrl?: string
 }
 
+export interface QuickLink {
+  id: string
+  label: string
+  url: string
+  emoji: string
+}
+
 export interface PetStageConfig {
   stage: 1 | 2 | 3
   minPoints: number
