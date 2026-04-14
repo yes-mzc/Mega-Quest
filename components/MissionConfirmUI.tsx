@@ -51,7 +51,7 @@ export default function MissionConfirmUI({
         {isConfirmed && !isLoading && (
           <>
             <CheckCircle2 size={48} className="text-green-500" />
-            <p className="text-lg font-bold text-green-600">확인되었습니다! ✅</p>
+            <p className="text-lg font-bold text-green-600">확인되었습니다!</p>
           </>
         )}
         {!isLoading && !isConfirmed && (
@@ -70,7 +70,7 @@ export default function MissionConfirmUI({
         }`}
         aria-label="미션 달성 확인"
       >
-        {isLoading ? '확인 중...' : isConfirmed ? '처리 중...' : '확인'}
+        {isLoading ? '확인 중...' : isConfirmed ? '확인 완료' : '확인'}
       </button>
     </div>
   )

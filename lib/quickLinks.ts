@@ -31,4 +31,10 @@ export const quickLinks: QuickLink[] = [
     url: 'https://hrd.livestudy.com/main/index.jsp',
     emoji: '🎓',
   },
+  {
+    id: 'megazone-play',
+    label: 'Megazone Play',
+    url: 'https://mz.megazoneplay.com/',
+    emoji: '🎮',
+  },
 ]
