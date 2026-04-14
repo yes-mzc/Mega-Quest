@@ -2,11 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, ListChecks } from 'lucide-react'
+import { Home, ListChecks, ShoppingBag } from 'lucide-react'
 
 const navItems = [
   { href: '/',       label: '홈',      Icon: Home },
   { href: '/quests', label: '퀘스트',   Icon: ListChecks },
+  { href: '/shop',   label: '상점',    Icon: ShoppingBag },
 ]
 
 export default function BottomNav() {

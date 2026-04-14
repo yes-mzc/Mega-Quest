@@ -7,15 +7,18 @@ import { getPetStage } from '@/lib/utils'
 interface GameStore {
   user: User
   quests: Quest[]
+  purchasedItems: string[]
   completeQuest: (questId: string) => void
+  purchaseItem: (itemId: string, pointCost: number) => boolean
   resetGame: () => void
 }
 
 export const useGameStore = create<GameStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: initialUser,
       quests: initialQuests,
+      purchasedItems: [],
 
       completeQuest: (questId: string) =>
         set((state) => {
@@ -33,12 +36,22 @@ export const useGameStore = create<GameStore>()(
           }
         }),
 
+      purchaseItem: (itemId: string, pointCost: number) => {
+        const state = get()
+        if (state.user.points < pointCost) return false
+        set({
+          user: { ...state.user, points: state.user.points - pointCost },
+          purchasedItems: [...state.purchasedItems, itemId],
+        })
+        return true
+      },
+
       resetGame: () =>
-        set({ user: { ...initialUser }, quests: [...initialQuests] }),
+        set({ user: { ...initialUser }, quests: [...initialQuests], purchasedItems: [] }),
     }),
     {
       name: 'mega-quest-storage',
-      version: 5, // mockData 변경 시 버전 올리면 localStorage 자동 초기화
+      version: 6, // mockData 변경 시 버전 올리면 localStorage 자동 초기화
     }
   )
 )
