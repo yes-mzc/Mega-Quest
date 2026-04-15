@@ -29,7 +29,7 @@ export default function CategoryTabs({ activeCategory }: CategoryTabsProps) {
 
   return (
     <div className="relative">
-      <div className="flex gap-2 overflow-x-auto pb-1 pr-8" role="tablist" aria-label="퀘스트 카테고리">
+      <div className="flex gap-2 overflow-x-auto pb-3 pr-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]" role="tablist" aria-label="퀘스트 카테고리">
         {TABS.map(({ value, label }) => {
           const isActive = activeCategory === value
           return (

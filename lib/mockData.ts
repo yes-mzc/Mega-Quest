@@ -1,9 +1,9 @@
 import type { User, Quest, PetStageConfig } from '@/lib/types'
 
 export const petStageConfig: PetStageConfig[] = [
-  { stage: 1, minPoints: 0,  maxPoints: 9,    label: '알 (Egg)',        emoji: '🥚' },
-  { stage: 2, minPoints: 10, maxPoints: 14,   label: '아기 트리니티',    emoji: '🐣' },
-  { stage: 3, minPoints: 15, maxPoints: null, label: '메가 트리니티',    emoji: '✨' },
+  { stage: 1, minPoints: 0,  maxPoints: 4,    label: '알 (Egg)',        emoji: '🥚' },
+  { stage: 2, minPoints: 5,  maxPoints: 19,   label: '아기 트리니티',    emoji: '🐣' },
+  { stage: 3, minPoints: 20, maxPoints: null, label: '메가 트리니티',    emoji: '✨' },
 ]
 
 export const initialUser: User = {

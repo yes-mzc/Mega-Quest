@@ -79,9 +79,9 @@ Only `id === 'meeting-room-qr'` renders `QRScannerUI` (2-second scan simulation)
 ### Pet Evolution Thresholds
 
 Defined in `lib/mockData.ts` as `petStageConfig`:
-- Stage 1 🥚: 0–9P
-- Stage 2 🐣: 10–14P
-- Stage 3 ✨: 15P+
+- Stage 1 🥚: 0–4P
+- Stage 2 🐣: 5–19P
+- Stage 3 ✨: 20P+
 
 ### `'use client'` Requirement
 

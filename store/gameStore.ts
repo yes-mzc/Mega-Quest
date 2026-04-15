@@ -51,7 +51,7 @@ export const useGameStore = create<GameStore>()(
     }),
     {
       name: 'mega-quest-storage',
-      version: 6, // mockData 변경 시 버전 올리면 localStorage 자동 초기화
+      version: 7, // mockData 변경 시 버전 올리면 localStorage 자동 초기화
     }
   )
 )
